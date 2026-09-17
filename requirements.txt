@@ -1,0 +1,7 @@
+pandas
+pyarrow
+requests
+statsmodels
+tensorflow
+scikit-learn
+matplotlib
