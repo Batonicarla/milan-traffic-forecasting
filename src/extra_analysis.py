@@ -17,7 +17,7 @@ print(f"Top traffic square: {top_square}")
 
 ts = df[df.square_id == top_square].set_index("datetime")["internet"].asfreq("10min").interpolate()
 
-# --- Analysis 1: Seasonal decomposition (daily + weekly) ---
+
 stl_daily = STL(ts, period=144, robust=True).fit()
 fig, axes = plt.subplots(4, 1, figsize=(12, 9), sharex=True)
 axes[0].plot(ts.index, ts.values); axes[0].set_ylabel("Observed")
@@ -36,7 +36,7 @@ ax.set_title(f"Weekly seasonal component - Square {top_square}")
 plt.savefig("fig_stl_weekly.png", dpi=150, bbox_inches="tight")
 plt.close()
 
-# --- Analysis 2: Autocorrelation, partial autocorrelation, stationarity ---
+
 fig, axes = plt.subplots(2, 1, figsize=(11, 7))
 plot_acf(ts, lags=288, ax=axes[0]); axes[0].set_title(f"ACF - Square {top_square}")
 plot_pacf(ts, lags=50, ax=axes[1], method="ywm"); axes[1].set_title(f"PACF - Square {top_square}")

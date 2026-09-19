@@ -1,0 +1,4 @@
+,train_s,inference_s,config
+SARIMA,11119.368497610092,341.6183898448944,
+LSTM,337.61887311935425,1.5043516159057617,"{'units': 64, 'lr': 0.001, 'val_rmse': 0.026032749651095245, 'model': <Sequential name=sequential_1, built=True>}"
+GRU,1536.2376725673676,1.242727279663086,"{'units': 32, 'lr': 0.001, 'val_rmse': 0.020368888878297665, 'model': <Sequential name=sequential_3, built=True>}"

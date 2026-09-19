@@ -57,12 +57,11 @@ def run_sarima(train, test, order=(1, 0, 1), seasonal_order=(0, 1, 1, 144)):
     train_time = time.time() - t0
 
     t0 = time.time()
-    preds = []
-    state = fit
-    for actual in test.values:
-        pred = state.forecast(1)[0]
-        preds.append(pred)
-        state = state.append([actual], refit=False)
+    combined = np.concatenate([train.values, test.values])
+    full_model = SARIMAX(combined, order=order, seasonal_order=seasonal_order,
+                          enforce_stationarity=False, enforce_invertibility=False)
+    full_res = full_model.filter(fit.params)
+    preds = full_res.predict(start=len(train), end=len(combined) - 1)
     infer_time = time.time() - t0
     return np.array(preds), train_time, infer_time
 
@@ -169,7 +168,7 @@ for idx, square_id in enumerate(top3):
 
 print("\nAll experiments complete.\n")
 
-# --- Results tables ---
+
 for square_id, results in all_results.items():
     label = "TOP TRAFFIC AREA" if square_id == top3[0] else f"area rank #{top3.index(square_id)+1}"
     print(f"\n--- Square {square_id} ({label}) ---")
@@ -178,12 +177,12 @@ for square_id, results in all_results.items():
 print("\n--- Training/inference time (measured on the top-traffic area) ---")
 print(pd.DataFrame(timing_stats).T)
 
-# Save tables to CSV for your report
+
 for square_id, results in all_results.items():
     pd.DataFrame(results).T.round(3).to_csv(f"results_square_{square_id}.csv")
 pd.DataFrame(timing_stats).T.to_csv("timing_stats.csv")
 
-# --- The 9 comparison plots ---
+
 for square_id in top3:
     test_series = predictions_store[square_id]["test_series"]
     for model_name, pred in predictions_store[square_id]["preds"].items():

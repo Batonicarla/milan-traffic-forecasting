@@ -16,7 +16,7 @@ READ_DTYPES = {"square_id": "int32", "time_interval": "int64", "internet": "floa
 txt_files = sorted(RAW_DIR.glob("*.txt"))
 print(f"Found {len(txt_files)} raw files")
 
-# memory BEFORE
+
 naive = pd.read_csv(txt_files[0], sep="\t", header=None, names=COLS)
 before_mb = naive.memory_usage(deep=True).sum() / 1e6
 print(f"Naive load of ONE day, default dtypes: {before_mb:.1f} MB | shape={naive.shape}")
@@ -51,7 +51,7 @@ df["datetime"] = pd.to_datetime(df["time_interval"], unit="ms")
 df = df.sort_values(["square_id", "datetime"]).reset_index(drop=True)
 df.to_parquet(PROCESSED_DIR / "milan_internet_traffic_full.parquet", index=False)
 
-# EDA 1: distribution
+
 total_by_square = df.groupby("square_id")["internet"].sum().sort_values(ascending=False)
 fig, ax = plt.subplots(figsize=(8, 5))
 ax.hist(total_by_square.values, bins=60)
@@ -61,12 +61,12 @@ ax.set_title("Distribution of total Internet traffic across Milan's 10,000 squar
 plt.savefig("fig_traffic_distribution.png", dpi=150, bbox_inches="tight")
 print(total_by_square.describe())
 
-# EDA 2: top-3 areas
+
 top3 = total_by_square.head(3).index.tolist()
 target_squares = top3 + [4159, 4556]
 print("Top 3 areas by total traffic:", top3)
 
-# EDA 3: first two weeks
+
 start, end = "2013-11-01", "2013-11-15"
 fig, axes = plt.subplots(5, 1, figsize=(11, 14), sharex=True)
 for ax, sq in zip(axes, target_squares):
