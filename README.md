@@ -6,20 +6,36 @@ activity across 10,000 geographical areas in Milan, Nov 2013 - Jan 2014).
 
 ## Project structure
 milan-traffic-forecasting/
-        ├── data/ (not included in this repo — see setup below)
-        ├── raw/ 62 daily .txt files from Harvard Dataverse
-        ├── grid/ Milano Grid geo-boundary files (downloaded, not used in analysis)
-         └── processed/ memory-optimized Parquet files built by src/process_and_explore.py
+
+              ├── data/ (not included in this repo — see setup below)
+        
+              ├── raw/ 62 daily .txt files from Harvard Dataverse
+        
+              ├── grid/ Milano Grid geo-boundary files (downloaded, not used in analysis)
+        
+                └── processed/ memory-optimized Parquet files built by src/process_and_explore.py
+         
 ─ src/
-     ├── download_data.py downloads the raw dataset from Harvard Dataverse
-     ├── process_and_explore.py memory-efficient processing + core exploratory analysis
-     ├── extra_analysis.py seasonal decomposition, ACF/PACF, stationarity test
-     ├── check_test_week.py data quality check on the evaluation week
-    └── modeling.py trains/evaluates SARIMA, LSTM, GRU across the top-3 traffic areas
+
+       ├── download_data.py downloads the raw dataset from Harvard Dataverse
+     
+       ├── process_and_explore.py memory-efficient processing + core exploratory analysis
+     
+       ├── extra_analysis.py seasonal decomposition, ACF/PACF, stationarity test
+     
+       ├── check_test_week.py data quality check on the evaluation week
+     
+       └── modeling.py trains/evaluates SARIMA, LSTM, GRU across the top-3 traffic areas
+
+       
  results/
-      ├── figures/ all generated plots (EDA + 9 prediction comparison plots)
-      └── tables/ MAE/MAPE/RMSE results per area + training/inference timing
+ 
+         ├── figures/ all generated plots (EDA + 9 prediction comparison plots)
+         
+         └── tables/ MAE/MAPE/RMSE results per area + training/inference timing
+         
 ├── requirements.txt
+
 └── README.md
 
 
@@ -42,7 +58,7 @@ tied to your account before any file can be downloaded, even via the API.
    the requirement for your account.
 3. Generate an API token at:
    https://dataverse.harvard.edu/dataverseuser.xhtml?selectTab=apiTokenTab
-4. Keep this token handy — you'll be prompted to paste it when running the
+4. Keep this token handy;  you'll be prompted to paste it when running the
    download script (it is never stored in this repo).
 
 ### 3. Download the dataset
