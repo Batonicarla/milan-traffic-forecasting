@@ -34,9 +34,9 @@ milan-traffic-forecasting/
          
          └── tables/ MAE/MAPE/RMSE results per area + training/inference timing
          
-├── requirements.txt
+         ├── requirements.txt
 
-└── README.md
+        └── README.md
 
 
 ## Setup
@@ -93,7 +93,7 @@ python src/modeling.py
   evaluates on Dec 16-22, and saves results tables, timing statistics, and
   9 comparison plots (3 models x 3 areas).
 
-**Note on runtime:** `modeling.py` is computationally heavy — SARIMA's seasonal
+**Note on runtime:** `modeling.py` is computationally heavy;  SARIMA's seasonal
 fit plus hyperparameter searches for LSTM and GRU across 3 areas can take
 45 minutes to a few hours on a CPU-only machine, with no GPU acceleration
 (This repo was developed and run on a Windows laptop with no GPU.) This is
@@ -102,9 +102,9 @@ expected; the script does not hang.
 ## Outputs
 
 After running the full pipeline, `results/figures/` contains:
-- `fig_traffic_distribution.png`, `fig_first_two_weeks.png` — exploratory analysis
-- `fig_stl_daily.png`, `fig_stl_weekly.png`, `fig_acf_pacf.png` — seasonal/autocorrelation analysis
-- `fig_pred_<square_id>_<model>.png` (9 files) — actual vs. predicted traffic per model per area
+- `fig_traffic_distribution.png`, `fig_first_two_weeks.png`  exploratory analysis
+- `fig_stl_daily.png`, `fig_stl_weekly.png`, `fig_acf_pacf.png`  seasonal/autocorrelation analysis
+- `fig_pred_<square_id>_<model>.png` (9 files)  actual vs. predicted traffic per model per area
 
 `results/tables/` contains:
 - `results_square_<square_id>.csv` (3 files) — MAE/MAPE/RMSE per model per area
@@ -130,10 +130,7 @@ accompanying report.
 
 ## AI usage disclosure
 
-AI assistance (Claude) was used for code scaffolding, debugging environment
-and dependency issues, and structuring this repository. All modeling
-decisions, interpretation of results, and the written report reflect the
-author's own understanding and analysis.
+AI assistance supported the development process, primarily for troubleshooting, debugging environment and dependency issues, understanding technical concepts, and organizing the project structure. AI was not used to generate the code. All code implementation, modeling decisions, analysis, interpretation of results, and written content reflect my own work and understanding.
 
 ## Author
  (Carla Batoni)
