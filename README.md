@@ -33,6 +33,9 @@ milan-traffic-forecasting/
          ├── figures/ all generated plots (EDA + 9 prediction comparison plots)
          
          └── tables/ MAE/MAPE/RMSE results per area + training/inference timing
+
+
+         
          
          ├── requirements.txt
 
@@ -107,8 +110,8 @@ After running the full pipeline, `results/figures/` contains:
 - `fig_pred_<square_id>_<model>.png` (9 files)  actual vs. predicted traffic per model per area
 
 `results/tables/` contains:
-- `results_square_<square_id>.csv` (3 files) — MAE/MAPE/RMSE per model per area
-- `timing_stats.csv` — training and inference time per model
+- `results_square_<square_id>.csv` (3 files)  MAE/MAPE/RMSE per model per area
+- `timing_stats.csv`  training and inference time per model
 
 ## Models
 
