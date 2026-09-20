@@ -6,19 +6,19 @@ activity across 10,000 geographical areas in Milan, Nov 2013 - Jan 2014).
 
 ## Project structure
 milan-traffic-forecasting/
-├── data/ (not included in this repo — see setup below)
-│ ├── raw/ 62 daily .txt files from Harvard Dataverse
-│ ├── grid/ Milano Grid geo-boundary files (downloaded, not used in analysis)
-│ └── processed/ memory-optimized Parquet files built by src/process_and_explore.py
-├── src/
-│ ├── download_data.py downloads the raw dataset from Harvard Dataverse
-│ ├── process_and_explore.py memory-efficient processing + core exploratory analysis
-│ ├── extra_analysis.py seasonal decomposition, ACF/PACF, stationarity test
-│ ├── check_test_week.py data quality check on the evaluation week
-│ └── modeling.py trains/evaluates SARIMA, LSTM, GRU across the top-3 traffic areas
-├── results/
-│ ├── figures/ all generated plots (EDA + 9 prediction comparison plots)
-│ └── tables/ MAE/MAPE/RMSE results per area + training/inference timing
+        ├── data/ (not included in this repo — see setup below)
+        ├── raw/ 62 daily .txt files from Harvard Dataverse
+        ├── grid/ Milano Grid geo-boundary files (downloaded, not used in analysis)
+         └── processed/ memory-optimized Parquet files built by src/process_and_explore.py
+─ src/
+     ├── download_data.py downloads the raw dataset from Harvard Dataverse
+     ├── process_and_explore.py memory-efficient processing + core exploratory analysis
+     ├── extra_analysis.py seasonal decomposition, ACF/PACF, stationarity test
+     ├── check_test_week.py data quality check on the evaluation week
+    └── modeling.py trains/evaluates SARIMA, LSTM, GRU across the top-3 traffic areas
+ results/
+      ├── figures/ all generated plots (EDA + 9 prediction comparison plots)
+      └── tables/ MAE/MAPE/RMSE results per area + training/inference timing
 ├── requirements.txt
 └── README.md
 
@@ -36,9 +36,9 @@ The dataset requires a one-time "guestbook" response (name/institution/purpose)
 tied to your account before any file can be downloaded, even via the API.
 
 1. Create a free account at https://dataverse.harvard.edu
-2. While logged in, go to the dataset page and click download on any one file:
+2. While logged in, go to the dataset page and click Download on any one file:
    https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/EGZHFV
-   Fill in the guestbook popup that appears and click Accept — this satisfies
+   Fill in the guestbook pop-up that appears and click Accept — this satisfies
    the requirement for your account.
 3. Generate an API token at:
    https://dataverse.harvard.edu/dataverseuser.xhtml?selectTab=apiTokenTab
@@ -64,15 +64,15 @@ python src/check_test_week.py
 python src/modeling.py
 ```
 
-- **`process_and_explore.py`** — converts the 62 raw files into a compact,
+- **`process_and_explore.py`**  converts the 62 raw files into a compact,
   memory-efficient Parquet dataset, and produces the traffic distribution and
   first-two-weeks comparison figures. Reports memory usage before/after
   optimization.
-- **`extra_analysis.py`** — STL seasonal decomposition (daily and weekly) and
+- **`extra_analysis.py`**  STL seasonal decomposition (daily and weekly) and
   ACF/PACF/ADF stationarity analysis on the highest-traffic area.
-- **`check_test_week.py`** — verifies there is no missing data in the
+- **`check_test_week.py`**  verifies that there is no missing data in the
   evaluation window (Dec 16-22, 2013).
-- **`modeling.py`** — the main experiment. Trains SARIMA, LSTM, and GRU for
+- **`modeling.py`**  the main experiment. Trains SARIMA, LSTM, and GRU for
   one-step-ahead forecasting on each of the three highest-traffic areas,
   evaluates on Dec 16-22, and saves results tables, timing statistics, and
   9 comparison plots (3 models x 3 areas).
@@ -80,7 +80,7 @@ python src/modeling.py
 **Note on runtime:** `modeling.py` is computationally heavy — SARIMA's seasonal
 fit plus hyperparameter searches for LSTM and GRU across 3 areas can take
 45 minutes to a few hours on a CPU-only machine, with no GPU acceleration
-(this repo was developed and run on a Windows laptop with no GPU). This is
+(This repo was developed and run on a Windows laptop with no GPU.) This is
 expected; the script does not hang.
 
 ## Outputs
@@ -101,9 +101,9 @@ statistical approach and modern sequence models, justified by exploratory
 evidence of strong daily/weekly seasonality (see `results/figures/fig_acf_pacf.png`
 and the STL decomposition):
 
-- **SARIMA** — explicit seasonal modeling, used as a classical baseline
-- **LSTM** — recurrent neural network, gated memory
-- **GRU** — recurrent neural network, simplified gating
+- **SARIMA**  explicit seasonal modeling, used as a classical baseline
+- **LSTM**  recurrent neural network, gated memory
+- **GRU**  recurrent neural network, simplified gating
 
 Input sequence length (144 steps = 1 day of 10-minute intervals) was chosen
 based on the ACF analysis showing the strongest autocorrelation at the daily
@@ -120,5 +120,4 @@ decisions, interpretation of results, and the written report reflect the
 author's own understanding and analysis.
 
 ## Author
-
-L (Carla Batoni)
+ (Carla Batoni)
